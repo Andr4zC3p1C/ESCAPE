@@ -1,4 +1,4 @@
-# DungeonCrawler
+# ESCAPE!
 A dungeon crawler based game.
 
 A little project of mine to learn more complex game development.
