@@ -24,14 +24,37 @@
     - add melee combat 
     - add a basic enemy
 
-0.3.0 2015-10-29:
-    - added basic AI algorithms 
+0.3.1 2015-12-30:
+    - added basic AI algorithms and created the Enemy class
     - added projectiles
+	- added basic particles
     - added basic animations
     - started working on world editor (might add a random level generator)
     - changed to libGDX game engine(runs with LWJGL binding for OpenGL) ---> better performance and looks with hardware-accelerated graphics
     - if the game is run fullscreen it will force vsync usage to omit screen tearing
-	TODO next: --> MAJOR UPDATE
+	TODO next: --> MAJOR UPDATE (1.0.0)
     - add event system
-    - create a serialization library
-    - add A* JPS path finding and 
+    - create a serialization library --> for loading levels and entities 
+    - add A* JPS path finding and finish the Enemy class
+	- design and implement destructive tile_map system(dynamic environment)
+	- improve particles
+	- create a texture packer for packing sprites and animations into sprite sheets, thus also generate .tex and .anim files
+	- might add a particle editor
+	- add melee combat
+	- add items and inventory system
+	- add dynamic lighting 
+	- add a Container class for container implementation(e.g. chests, wardrobes, weapon stands, ...)
+	- design level loading and saving using the serialization library
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
