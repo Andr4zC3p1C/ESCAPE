@@ -1,0 +1,37 @@
+0.1.0 2015-06-09:
+    - started on engine
+    - added window
+    - added renderer -> BufferedImage pixel manipulation with int array
+    - added sprites -> loading from sprite sheets, also camera and proper coordinate system
+    - added input -> bad input event handling, since the component polls events too frequently and not in the same thread as is the game loop
+    - added entities -> sprite, position, update(), render(), ..., also player
+    - added tile map & tile map loading
+    - added scenes
+    - added scene manager
+    TODO next:
+    - better input handling
+    - add different window resolutions & fullscreen
+    - add collision detection manager
+
+0.2.0 2015-08-10:
+    - added tile collision detection for all entities
+    - fixed input
+    - different display modes(fullscreen & windowed + fullscreen resolution) & resolutions(any resolution really)
+    TODO next:
+    - player animation(movement + attack)
+    - add items
+    - add projectiles
+    - add melee combat 
+    - add a basic enemy
+
+0.3.0 2015-10-29:
+    - added basic AI algorithms 
+    - added projectiles
+    - added basic animations
+    - started working on world editor (might add a random level generator)
+    - changed to libGDX game engine(runs with LWJGL binding for OpenGL) ---> better performance and looks with hardware-accelerated graphics
+    - if the game is run fullscreen it will force vsync usage to omit screen tearing
+	TODO next: --> MAJOR UPDATE
+    - add event system
+    - create a serialization library
+    - add A* JPS path finding and 
