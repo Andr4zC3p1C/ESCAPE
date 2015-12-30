@@ -25,7 +25,7 @@ public class DesktopLauncher {
 		config.width = width;
 		config.height = height;
 		config.fullscreen = false;
-		config.useGL30 = true;
+		config.useGL30 = false;
 		config.title = Main.TITLE + "  " + Main.VERSION;
 		
 		Main.WIDTH = width;
