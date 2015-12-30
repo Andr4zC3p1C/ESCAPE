@@ -44,7 +44,7 @@
     - add items and inventory system
     - add dynamic lighting 
     - add a Container class for container implementation(e.g. chests, wardrobes, weapon stands, ...)
-    - design level loading and saving using the serialization library
+    - design level loading and saving using the serialization library 
 	
 	
 	
