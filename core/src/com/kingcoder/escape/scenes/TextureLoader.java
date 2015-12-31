@@ -6,7 +6,6 @@ import java.net.URL;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kingcoder.escape.Main;
 
@@ -19,9 +18,6 @@ public class TextureLoader extends Scene implements Runnable{
     public void init(){
     	sceneID = SceneID.TextureLoader; 
         initialized = true;
-        
-        // rendering the loading
-        Pixmap pixels = new Pixmap(100, 100, Format.RGBA8888);
         
         new Thread(this).start();
     }

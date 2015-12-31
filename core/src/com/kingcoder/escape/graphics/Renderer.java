@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.kingcoder.escape.Main;
 import com.kingcoder.escape.math.Vector2f;
 
@@ -34,8 +35,8 @@ public class Renderer {
 		cameraPos = new Vector2f(Main.WIDTH / 2, Main.HEIGHT / 2);
 		
 		// the batches
-		dynamicBatch = new SpriteBatch();
-		staticBatch = new SpriteBatch();
+		dynamicBatch = new SpriteBatch(1000, createDefaultShader());
+		staticBatch = new SpriteBatch(1000, createDefaultShader());
 		
 		loadCursors();
 		Gdx.graphics.setCursor(aim_Cursor);
@@ -100,6 +101,45 @@ public class Renderer {
 		cameraPos.x = vec.x;
 		cameraPos.y = vec.y;
 		camera.update();
+	}
+	
+	
+	// SHADER FIX:
+	public static ShaderProgram createDefaultShader() {
+		   String vertexShader = "#version 330 core\n"
+		      + "in vec4 " + ShaderProgram.POSITION_ATTRIBUTE + ";\n" //
+		      + "in vec4 " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" //
+		      + "in vec2 " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n" //
+		      + "uniform mat4 u_projTrans;\n" //
+		      + "out vec4 v_color;\n" //
+		      + "out vec2 v_texCoords;\n" //
+		      + "\n" //
+		      + "void main()\n" //
+		      + "{\n" //
+		      + "   v_color = " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" //
+		      + "   v_color.a = v_color.a * (255.0/254.0);\n" //
+		      + "   v_texCoords = " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n" //
+		      + "   gl_Position =  u_projTrans * " + ShaderProgram.POSITION_ATTRIBUTE + ";\n" //
+		      + "}\n";
+		   String fragmentShader = "#version 330 core\n"
+		      + "#ifdef GL_ES\n" //
+		      + "#define LOWP lowp\n" //
+		      + "precision mediump float;\n" //
+		      + "#else\n" //
+		      + "#define LOWP \n" //
+		      + "#endif\n" //
+		      + "in LOWP vec4 v_color;\n" //
+		      + "in vec2 v_texCoords;\n" //
+		      + "out vec4 fragColor;\n" //
+		      + "uniform sampler2D u_texture;\n" //
+		      + "void main()\n"//
+		      + "{\n" //
+		      + "  fragColor = v_color * texture(u_texture, v_texCoords);\n" //
+		      + "}";
+
+		   ShaderProgram shader = new ShaderProgram(vertexShader, fragmentShader);
+		   if (shader.isCompiled() == false) throw new IllegalArgumentException("Error compiling shader: " + shader.getLog());
+		   return shader;
 	}
 	
 	public void dispose(){
