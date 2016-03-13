@@ -6,10 +6,11 @@ import java.net.URL;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kingcoder.escape.Main;
 
-public class TextureLoader extends Scene implements Runnable{
+public class AssetLoader extends Scene implements Runnable{
 	private float progress = 0.0f;
 	
 	private String[] textures;
@@ -18,6 +19,9 @@ public class TextureLoader extends Scene implements Runnable{
     public void init(){
     	sceneID = SceneID.TextureLoader; 
         initialized = true;
+        
+        // rendering the loading
+        Pixmap pixels = new Pixmap(100, 100, Format.RGBA8888);
         
         new Thread(this).start();
     }
@@ -40,12 +44,12 @@ public class TextureLoader extends Scene implements Runnable{
     // separate thread loading
     public void run(){
         // loading all textures into RAM
-    	URL url = getClass().getResource("/textures/");
-    	File dir = new File(url.getPath());
+    	//URL url = getClass().getResource("/textures/");
+    	// FIle dir = new File(url.getPath());
     	
     	// loading the texture names
-    	textures = dir.list();
-    	int numTextures = textures.length;
+    	textures = new String[]{"player", "projectiles", "tileset"};
+    	int numTextures = 3;
         
         // loading the pixmaps
     	pixmaps = new Pixmap[numTextures];

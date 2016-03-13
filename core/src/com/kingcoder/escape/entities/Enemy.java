@@ -46,33 +46,14 @@ public abstract class Enemy extends Entity{
 		super(spawnPos, size, entity_id, fireRate);
 		
 		ray = new Vector2f(spawnPos.x, spawnPos.y);
-		
-		int dir = Main.random.nextInt(40) / 10;
-		switch(dir){
-		case 0: // right
-			direction.x = Main.RIGHT_DIR.x;
-			direction.y = Main.RIGHT_DIR.y;
-			break;
-		case 1: // left
-			direction.x = Main.LEFT_DIR.x;
-			direction.y = Main.LEFT_DIR.y;
-			break;
-		case 2: // up
-			direction.x = Main.UP_DIR.x;
-			direction.y = Main.UP_DIR.y;
-			break;
-		case 3: // down
-			direction.x = Main.DOWN_DIR.x;
-			direction.y = Main.DOWN_DIR.y;
-			break;
-		}
 	}
 
-	public void update() {
+	public void updateA() {
 		// check if visible(if it is do AI stuff)
 		
 		if(!dead){
 			if(activated){
+				System.out.println(state);
 				AI();
 			}else {
 				// TODO : check if inside of loaded chunks
@@ -85,7 +66,7 @@ public abstract class Enemy extends Entity{
 
 	public abstract void updateEnemy();
 	
-	public void render(SpriteBatch batch) {
+	public void renderA(SpriteBatch batch) {
 		renderEnemy(batch);
 	}
 
@@ -138,20 +119,20 @@ public abstract class Enemy extends Entity{
 				
 				switch(dir){
 				case 0: // right
-					direction.x = Main.RIGHT_DIR.x;
-					direction.y = Main.RIGHT_DIR.y;
+					direction.x = 1;
+					direction.y = 0;
 					break;
 				case 1: // left
-					direction.x = Main.LEFT_DIR.x;
-					direction.y = Main.LEFT_DIR.y;
+					direction.x = -1;
+					direction.y = 0;
 					break;
 				case 2: // up
-					direction.x = Main.UP_DIR.x;
-					direction.y = Main.UP_DIR.y;
+					direction.x = 0;
+					direction.y = 1;
 					break;
 				case 3: // down
-					direction.x = Main.DOWN_DIR.x;
-					direction.y = Main.DOWN_DIR.y;
+					direction.x = 0;
+					direction.y = -1;
 					break;
 				}
 				
@@ -251,7 +232,7 @@ public abstract class Enemy extends Entity{
 				state = ALERT;
 			}
 			*/
-			 state = ALERT;
+			state = IDLE;
 			break;
 		}
 	}

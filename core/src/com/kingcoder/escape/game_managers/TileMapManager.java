@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -77,8 +79,8 @@ public class TileMapManager {
 
         try {
             // loading width, height and tiles keys:
-            InputStreamReader isrTiles = new InputStreamReader(getClass().getResourceAsStream("/levels/" + path + "/" + path + ".map"));
-            BufferedReader br = new BufferedReader(isrTiles);
+            FileHandle file = Gdx.files.internal("levels/" + path + "/" + path + ".map");
+            BufferedReader br = file.reader((int)file.length());
 
             tileSize = Integer.parseInt(br.readLine().split(" = ")[1]);
             br.readLine();
@@ -91,7 +93,6 @@ public class TileMapManager {
                 numLines++;
                 lines.add(line);
             }
-
 
             tileTypes = new String[numLines];
             tileTextures = new String[numLines];
@@ -115,7 +116,6 @@ public class TileMapManager {
                 }
             }
             br.close();
-            isrTiles.close();
 
             // creating the tile types
             this.tileTypes = new int[height][width];

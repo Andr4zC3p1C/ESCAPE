@@ -23,7 +23,7 @@ public class Particles {
 	
 	private Texture texture;
 	
-	public Particles(int numParticles, int distance, float speed, float red, float green, float blue, float alpha){
+	public Particles(int numParticles, int distance, float speed, int size, float red, float green, float blue, float alpha){
 		removed = false;
 		random = new Random();
 		
@@ -32,12 +32,12 @@ public class Particles {
 		
 		distances = new int[numParticles];
 		for(int i=0; i < numParticles; i++){
-			distances[i] = distance + random.nextInt(distance / 5);
+			distances[i] = distance + random.nextInt(distance);
 		}
 		
-		Pixmap pixmap = new Pixmap(4, 4, Format.RGB888);
-		for(int i=0; i < 4; i++){
-			for(int j=0; j < 4; j++){
+		Pixmap pixmap = new Pixmap(size, size, Format.RGBA8888);
+		for(int i=0; i < size; i++){
+			for(int j=0; j < size; j++){
 				pixmap.setColor(red, green, blue, alpha);
 				pixmap.drawPixel(j, i);
 			}

@@ -1,5 +1,7 @@
 package com.kingcoder.escape.projectiles;
 
+import java.util.List;
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kingcoder.escape.Main;
@@ -26,12 +28,8 @@ public class Projectile {
 	protected int range;
 	
 	// particles
-	protected Particles particles;
-	protected int numParticles;
-	protected int particleColor;
-	protected long particleDurration;
-	
-	// TODO: add particles
+	protected Particles destroyParticles;
+	private List<Particles> airParticles; 
 	
 	protected Projectile(Vector2f position, Vector2f direction, int ownerIndex, String sprite){
 		destroyed = false;
@@ -58,7 +56,7 @@ public class Projectile {
 				// check if inside the rectangle
 				if((position.x >= entityRect.getX() - entityRect.getWidth()/2  && position.x <= entityRect.getX() + entityRect.getWidth()/2)
 					&& (position.y >= entityRect.getY() - entityRect.getHeight()/2 && position.y <= entityRect.getY() + entityRect.getHeight()/2)){
-					particles.setSpawnPos(position);
+					destroyParticles.setSpawnPos(position);
 					destroyed = true;
 					collidedWithEntity = true;
 					entityIndex = i;
@@ -69,13 +67,13 @@ public class Projectile {
 			// checking collision for tiles
 			if(!collidedWithEntity){
 				if(Game.tileMapManager.isInTileSolid((int)position.x, (int)position.y)){
-					particles.setSpawnPos(position);
+					destroyParticles.setSpawnPos(position);
 					destroyed = true;
 				}
 			}
 			
 			if(Vector2f.subtract(position, spawnPos).length() > range){
-				particles.setSpawnPos(position);
+				destroyParticles.setSpawnPos(position);
 				destroyed = true;
 			}
 			
@@ -83,10 +81,10 @@ public class Projectile {
 			position.y += direction.y * speed;
 		}else{
 			// update the particles
-			if(!particles.isRemoved()){
-				particles.update();
+			if(!destroyParticles.isRemoved()){
+				destroyParticles.update();
 			}else{
-				particles.dispose();
+				destroyParticles.dispose();
 				removed = true;
 			}
 
@@ -97,19 +95,13 @@ public class Projectile {
 		}
 	}
 	
-	protected void setParticles(int numParticles, int color, long durration){
-		this.numParticles = numParticles;
-		particleColor = color;
-		particleDurration = durration;
-	}
-	
 	public void render(SpriteBatch batch){
 		if(!destroyed){
 			Sprite projectile = Main.textureManager.getSprite(sprite);
 			projectile.setCenter(position.x, position.y);
 			projectile.draw(batch);
 		}else{
-			particles.render(batch);
+			destroyParticles.render(batch);
 		}
 	}
 	

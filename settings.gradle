@@ -1,1 +1,2 @@
+getStartParameter().setProjectCacheDir(new File('M:/Projects/eclipse/escape_w/Gradle/'))
 include 'desktop', 'core'

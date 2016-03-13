@@ -7,11 +7,11 @@ public class FireBolt extends Projectile{
 
 	public FireBolt(Vector2f position, Vector2f direction, int ownerIndex) {
 		super(position, direction, ownerIndex, "fire_bolt");
-		speed = 6;
+		speed = 20;
 		damage = 50;
-		range = 1000;
+		range = 2000;
 		
-		particles = new Particles(60, 40, 8, 1.0f, 0.0f, 0.0f, 1.0f);
-		particles.setSpawnPos(new Vector2f(position.x, position.y));
+		destroyParticles = new Particles(4, 50, 5, 8, 1.0f, 0.4f, 0.0f, 1.0f);
+		destroyParticles.setSpawnPos(new Vector2f(position.x, position.y));
 	}
 }

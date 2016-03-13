@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kingcoder.escape.graphics.Animation;
+import com.kingcoder.escape.graphics.Particles;
 import com.kingcoder.escape.math.Rect;
 import com.kingcoder.escape.math.Vector2f;
 import com.kingcoder.escape.projectiles.Projectile;
@@ -34,9 +35,10 @@ public abstract class Entity {
     protected int distBetPointsX;
     protected int distBetPointsY;
     
-    // animation
+    // graphics
     protected ArrayList<Animation> animations;
     protected int currentAnimation = 0;
+    private Particles particles;
     
     // attack
     protected ArrayList<Projectile> projectiles;
@@ -73,10 +75,24 @@ public abstract class Entity {
         return removed;
     }
 
-    public abstract void update();
-    public abstract void render(SpriteBatch batch);
     
-    // FUNCTIONS
+    public void update(){
+    	if(particles != null)
+    		particles.update();
+    	
+    	updateA();
+    }
+    
+    public void render(SpriteBatch batch){
+    	renderA(batch);
+
+    	if(particles != null && !particles.isRemoved())
+    		particles.render(batch);
+    }
+    
+    protected abstract void updateA();
+    protected abstract void renderA(SpriteBatch batch);
+    
     protected void collisionX(Vector2f dir){
     	dir.normalize();
         collisionPointsY = 2 + (int)size.y / Game.tileMapManager.getTileSize();
@@ -196,6 +212,9 @@ public abstract class Entity {
     	}else{
     		health -= damage;
     	}
+    	
+    	particles = new Particles(15, 15, 8, 7, 1.0f, 0.0f, 0.0f, 1.0f);
+    	particles.setSpawnPos(position);
     }
 
     // setters

@@ -38,7 +38,7 @@ public class Player extends Entity{
         animations.get(1).setAvoidFrame(0);
     }
 
-    public void update() {
+    public void updateA() {
     	movement();
         doLogic();
         
@@ -50,7 +50,7 @@ public class Player extends Entity{
         Main.renderer.setCameraPosition(position);
     }
 
-    public void render(SpriteBatch batch) {
+    public void renderA(SpriteBatch batch) {
     	// rendering the projectiles
     	for(int i=0; i < projectiles.size(); i++){
     		projectiles.get(i).render(batch);
@@ -68,19 +68,19 @@ public class Player extends Entity{
             direction.y = 0;
 
             if (Gdx.input.isKeyPressed(Keys.W)) {
-            	direction.y += Main.UP_DIR.y;
+            	direction.y += 1;
             }
 
             if (Gdx.input.isKeyPressed(Keys.A)) {
-            	direction.x += Main.LEFT_DIR.x;
+            	direction.x += -1;
             }
 
             if (Gdx.input.isKeyPressed(Keys.S)) {
-            	direction.y += Main.DOWN_DIR.y;
+            	direction.y += -1;
             }
 
             if (Gdx.input.isKeyPressed(Keys.D)) {
-            	direction.x += Main.RIGHT_DIR.x;
+            	direction.x += 1;
             }
 
             direction.normalize();
@@ -151,7 +151,7 @@ public class Player extends Entity{
     	if(melee){
     		
     	}else{
-    		projectiles.add(new FireBolt(new Vector2f(position.x, position.y), direction, index));
+    			projectiles.add(new FireBolt(new Vector2f(position.x, position.y), direction, index));
     	}
     	
     }

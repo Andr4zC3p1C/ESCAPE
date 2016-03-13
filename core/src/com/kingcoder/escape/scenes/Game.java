@@ -132,7 +132,7 @@ public class Game extends Scene implements Runnable{
     	tileMapManager.loadMap(level);
     	
     	// loading the entities
-    	//entityManager.addEntity(new Skeleton(new Vector2f(100, 250), new Vector2f(48, 48), Entity_ID.enemy));
+    	entityManager.addEntity(new Skeleton(new Vector2f(100, 250), new Vector2f(48, 48), Entity_ID.enemy));
     	entityManager.addEntity(new Player(new Vector2f(100, 100), new Vector2f(42, 48), Entity_ID.player));
     	
     	// initializing the chunks
