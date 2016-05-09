@@ -11,6 +11,4 @@ The game will contain a world/level editor for creating / editing levels.
 Game will contain save / load system.
 The game will use pixel art.
 
-Feel free to comment ;) 
-
 Andraž Čepič
