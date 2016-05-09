@@ -139,7 +139,6 @@ public class TileMapManager {
         }
     }
 
-    
     public void initTexture(){
     	mapTexture = new Texture(pixmap);
     	mapTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
